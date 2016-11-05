@@ -3,7 +3,7 @@
 
 // Constants regarding the senctence geometry
 #define MAX_SENTENCE_LEN 60
-#define BUBBLE_OVERHEAD 4
+#define BUBBLE_OVERHEAD 7
 
 // Constants regarding the WOMBAT Geometry
 #define WOMBAT_LEN 27

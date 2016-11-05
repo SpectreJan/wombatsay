@@ -134,10 +134,60 @@ divide_lines(struct wombats_sentence *sentence, char *line)
 }
 
 /******************************************************************************/
+struct speechbubble_t*
+generate_speechbubble(struct wombats_sentence *sentence)
+{
+  struct speechbubble_t *bubble = (struct speechbubble_t*) malloc(sizeof(struct speechbubble_t));
+
+  bubble->speechlines = (char**) malloc(sentence->linecount*sizeof(char*));
+  for (int i = 0; i < sentence->linecount; ++i) {
+    bubble->speechlines[i] = (char*) malloc(strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
+    /*bubble->speechlines[i] = " < \0";*/
+    strcpy(bubble->speechlines[i], " < ");
+    strcat(bubble->speechlines[i], sentence->lines[i]);
+    /*strcat(bubble->speechlines[i], sentence->lines[0]);*/
+    strcat(bubble->speechlines[i], " >");
+  }
+  bubble->linecount = sentence->linecount;
+  bubble->overline = (char*) malloc(strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
+  bubble->underline = (char*) malloc(strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
+
+  strcpy(bubble->overline, "  ");
+  strcpy(bubble->underline, "  ");
+  memset(bubble->overline+2, '_', strlen(sentence->lines[0])+2);
+  memset(bubble->underline+2, '-', strlen(sentence->lines[0])+2);
+
+  return bubble;
+}
+
+/******************************************************************************/
 void
 cleanup_line(char *line)
 {
-  free(line);
-  line = NULL;
+  if(line != NULL) {
+    free(line);
+    line = NULL;
+  }
 }
 
+void
+cleanup_speechbubble(struct speechbubble_t *speechbubble)
+{
+  if(speechbubble != NULL) {
+    free(speechbubble->overline);
+    free(speechbubble->underline);
+
+    for (int i = 0; i < speechbubble->linecount; ++i) {
+      free(speechbubble->speechlines[i]);
+      speechbubble->speechlines[i] = NULL;
+    }
+
+    free(speechbubble->speechlines);
+    speechbubble->speechlines = NULL;
+
+    free(speechbubble);
+    speechbubble = NULL;
+
+  }
+
+}

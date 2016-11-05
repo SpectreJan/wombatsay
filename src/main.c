@@ -35,9 +35,15 @@ int main(int argc, char *argv[])
   // Allocate Buffer for the sentence lines
   divide_lines(&sentence, line);
   cleanup_line(line);
+
+  struct speechbubble_t *speechbubble = generate_speechbubble(&sentence);
+
   cleanup_sentence(&sentence);
 
+  draw_speechbubble(speechbubble);
   draw_wombat();
+
+  cleanup_speechbubble(speechbubble);
 
   return 0;
 }

@@ -27,5 +27,20 @@ On Windows you can just click the exe, on Linux if the bin is in your PATH you c
 Wombatsay either accepts cmdline arguments or you can type the sentence after starting the program.
 
 ```
-wombatsay I am a wombat
+wombatsay
+What does the wombat say?
+I am a wombat
+  _______________
+ < I am a wombat >
+  ---------------
+     \
+      \  /\___/\
+        /       \--------\
+        ()  ()            \
+      / __                 \
+     |  ||        >         |
+     <  --    __ >          |oo
+      < -----/|      ____   |oo
+        /_____|-----/______ |
+
 ```

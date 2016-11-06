@@ -45,5 +45,10 @@ int main(int argc, char *argv[])
 
   cleanup_speechbubble(speechbubble);
 
+  // Windows user like to click exes, so prevent the cmdline from vanishing
+#if defined (_WIN32) || defined (_WIN64)
+  int c = getc();
+#endif
+
   return 0;
 }

@@ -152,6 +152,9 @@ generate_speechbubble(struct wombats_sentence *sentence)
   bubble->overline = (char*) malloc(strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
   bubble->underline = (char*) malloc(strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
 
+  memset(bubble->overline, 0, strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
+  memset(bubble->underline, 0, strlen(sentence->lines[0])+BUBBLE_OVERHEAD);
+
   strcpy(bubble->overline, "  ");
   strcpy(bubble->underline, "  ");
   memset(bubble->overline+2, '_', strlen(sentence->lines[0])+2);
